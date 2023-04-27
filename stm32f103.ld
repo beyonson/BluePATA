@@ -12,10 +12,10 @@ SECTIONS
         /* Set the initial address to 0 */
         . = 0;
         LONG(__reset_stack_pointer);
-        LONG(main | 1);
-        /* The whole interrupt table is 332 bytes long. Advance to that position. */
+        LONG(reset_handler | 1);
+        /* skip to end of vector table */
         . = 332;
-        /* And here comes the rest of the code */
+        /* place the reset of the code */
         *(.text*)
     } > FLASH /* Put this in the flash memory region */
 }
