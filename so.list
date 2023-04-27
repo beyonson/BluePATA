@@ -1,0 +1,49 @@
+
+so.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+08000000 <vtable>:
+ 8000000:	20000400 	andcs	r0, r0, r0, lsl #8
+ 8000004:	08000009 	stmdaeq	r0, {r0, r3}
+
+08000008 <reset_handler>:
+ 8000008:	e7ff      	b.n	800000a <main>
+
+0800000a <main>:
+ 800000a:	480b      	ldr	r0, [pc, #44]	; (8000038 <main+0x2e>)
+ 800000c:	6801      	ldr	r1, [r0, #0]
+ 800000e:	f04f 0210 	mov.w	r2, #16
+ 8000012:	ea41 0102 	orr.w	r1, r1, r2
+ 8000016:	6001      	str	r1, [r0, #0]
+ 8000018:	4808      	ldr	r0, [pc, #32]	; (800003c <main+0x32>)
+ 800001a:	6801      	ldr	r1, [r0, #0]
+ 800001c:	f46f 0270 	mvn.w	r2, #15728640	; 0xf00000
+ 8000020:	ea01 0102 	and.w	r1, r1, r2
+ 8000024:	f441 1140 	orr.w	r1, r1, #3145728	; 0x300000
+ 8000028:	6001      	str	r1, [r0, #0]
+ 800002a:	4805      	ldr	r0, [pc, #20]	; (8000040 <main+0x36>)
+ 800002c:	6801      	ldr	r1, [r0, #0]
+ 800002e:	f441 5100 	orr.w	r1, r1, #8192	; 0x2000
+ 8000032:	6001      	str	r1, [r0, #0]
+ 8000034:	e7fe      	b.n	8000034 <main+0x2a>
+ 8000036:	10180000 	andsne	r0, r8, r0
+ 800003a:	10044002 	andne	r4, r4, r2
+ 800003e:	100c4001 	andne	r4, ip, r1
+ 8000042:	Address 0x0000000008000042 is out of bounds.
+
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002041 	andeq	r2, r0, r1, asr #32
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000016 	andeq	r0, r0, r6, lsl r0
+  10:	726f4305 	rsbvc	r4, pc, #335544320	; 0x14000000
+  14:	2d786574 	cfldr64cs	mvdx6, [r8, #-464]!	; 0xfffffe30
+  18:	0600334d 	streq	r3, [r0], -sp, asr #6
+  1c:	094d070a 	stmdbeq	sp, {r1, r3, r8, r9, sl}^
+  20:	Address 0x0000000000000020 is out of bounds.
+

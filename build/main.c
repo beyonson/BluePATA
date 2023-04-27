@@ -1,7 +1,16 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#include "stm32f10x.h"
+#include "stm32f103.h"
+
+int main(void);
+
+void reset_handler(void)
+{
+    main();
+
+    while(1){}
+}
 
 int main(void)
 {

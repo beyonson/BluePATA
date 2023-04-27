@@ -1,40 +1,36 @@
-# setup
-COMPILE_OPTS = -mcpu=cortex-m3 -mthumb -Wall -g -O0
-INCLUDE_DIRS = -I . -I ../include
+default_target: all
 
-CC = arm-none-eabi-gcc
-CFLAGS = $(COMPILE_OPTS) $(INCLUDE_DIRS)
+C_COMPILE_OPTS = -mcpu=cortex-m3 -S -mthumb --specs=nosys.specs
+AS_COMPILE_OPTS = -mcpu=cortex-m3
+INCLUDE_DIRS = -I . -I ../include 
 
-CXX = arm-none-eabi-g++
-CXXFLAGS = $(COMPILE_OPTS) $(INCLUDE_DIRS)
+# create C object file
+CC = arm-none-eabi-gcc 
+CFLAGS = $(C_COMPILE_OPTS) $(INCLUDE_DIRS)
 
-AS = arm-none-eabi-gcc
-ASFLAGS = $(COMPILE_OPTS) -c
+# create assembly object file
+AS = arm-none-eabi-as
+ASFLAGS = $(AS_COMPILE_OPTS)
 
-LD = arm-none-eabi-gcc
-LDFLAGS = -Wl,--gc-sections,-Map=$@.map,-cref,-u,Reset_Handler  --specs=nosys.specs $(INCLUDE_DIRS)
+# compile elf from objects using linker file
+LD = arm-none-eabi-ld 
+LDFLAGS = -T flash.ld
 
+# create binary from elf
 OBJCP = arm-none-eabi-objcopy
 OBJCPFLAGS = -O binary
 
-AR = arm-none-eabi-ar
-ARFLAGS = cr
+all: main.o main.elf main.bin
 
-MAIN_OUT = main
-MAIN_OUT_ELF = $(MAIN_OUT).elf
-MAIN_OUT_BIN = $(MAIN_OUT).bin
+main.s: main.c
+	$(CC) $(CFLAGS) main.c -o $@
 
-# all
-all: $(MAIN_OUT_ELF) $(MAIN_OUT_BIN)
+main.o: main.s 
+	$(AS) $(ASFLAGS) main.s -o $@
 
-# main
-$(MAIN_OUT_ELF): main.o 
-	$(LD) $(LDFLAGS) main.o  --output $@
+main.elf: main.s
+	$(LD) $(LDFLAGS) main.o -o main.elf 
 
-$(MAIN_OUT_BIN): $(MAIN_OUT_ELF)
+main.bin: main.elf
 	$(OBJCP) $(OBJCPFLAGS) $< $@
-
-clean:
-	-rm *.o src/*.o  $(MAIN_OUT_ELF) $(MAIN_OUT_BIN)
-
 
