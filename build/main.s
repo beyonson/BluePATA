@@ -40,10 +40,10 @@ main:
 	push	{r7}
 	add	r7, sp, #0
 	ldr	r3, .L5
-	ldr	r3, [r3, #20]
+	ldr	r3, [r3, #24]
 	ldr	r2, .L5
 	orr	r3, r3, #16
-	str	r3, [r2, #20]
+	str	r3, [r2, #24]
 	ldr	r3, .L5+4
 	ldr	r3, [r3, #4]
 	ldr	r2, .L5+4
@@ -54,6 +54,11 @@ main:
 	ldr	r2, .L5+4
 	orr	r3, r3, #3145728
 	str	r3, [r2, #4]
+	ldr	r3, .L5+4
+	ldr	r3, [r3, #12]
+	ldr	r3, .L5+4
+	movs	r2, #0
+	str	r2, [r3, #12]
 	movs	r3, #0
 	mov	r0, r3
 	mov	sp, r7

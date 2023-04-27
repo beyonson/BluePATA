@@ -23,29 +23,22 @@ typedef struct
     vol uint32_t CIR;
     vol uint32_t APB2RSTR;
     vol uint32_t APB1RSTR;
+    vol uint32_t AHBENR;
     vol uint32_t APB2ENR;
     vol uint32_t APB1ENR;
     vol uint32_t BDCR;
     vol uint32_t CSR;
     vol uint32_t AHBRSTR;
     vol uint32_t CFGR2;
-
 } RCC_TypeDef;
 
-// RCC offsets
-#define RCC_BASE    (vol uint32_t)0x40021000 // reset and clock control
+// RCC base
+#define RCC_BASE    (uint32_t)0x40021000 // reset and clock control
 
-// GPIO offsets
-#define GPIOA_BASE  (vol uint32_t)0x40010800
-#define GPIOB_BASE  (vol uint32_t)0x40010C00
-#define GPIOC_BASE  (vol uint32_t)0x40011000
-// #define CRL    (vol uint32_t)0x00 // port configuration register low
-// #define CRH    (vol uint32_t)0x04 // port configuration register high
-// #define IDR    (vol uint32_t)0x08 // input data register
-// #define ODR    (vol uint32_t)0x0C // output data register
-// #define BSRR   (vol uint32_t)0x10 // port bit set/reset register
-// #define BRR    (vol uint32_t)0x14 // port bit reset register
-// #define LCKR   (vol uint32_t)0x18 // port configuration lock register
+// GPIO bases
+#define GPIOA_BASE  (uint32_t)0x40010800
+#define GPIOB_BASE  (uint32_t)0x40010C00
+#define GPIOC_BASE  (uint32_t)0x40011000
 
 // declare typedefs
 #define GPIOC       ((GPIO_TypeDef *) GPIOC_BASE)
