@@ -21,7 +21,7 @@ int main(void)
     {
         GPIOC->ODR &= 0x0000;
         delay();
-        GPIOC->ODR |= 0x0000;
+        GPIOC->ODR |= 0x2000;
         delay();
     }
 }
