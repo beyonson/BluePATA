@@ -2,6 +2,7 @@
 #include <stdint.h>
 
 #include "stm32f103.h"
+#include "gpio_drive.h"
 
 int main(void);
 void delay(void);
@@ -15,18 +16,12 @@ void reset_handler(void)
 
 int main(void)
 {
-    // enable APB2
-    RCC->APB2ENR |= 0x10;
-
-    // configure gpio PC13
-    GPIOC->CRH &= 0xFF0FFFFF;
-    GPIOC->CRH |= 0x00300000;
-
+    initGPIO(C, 13, OUTPUT10, GP_PP);
     for(;;)
     {
         GPIOC->ODR &= 0x0000;
         delay();
-        GPIOC->ODR |= 0x2000;
+        GPIOC->ODR |= 0x0000;
         delay();
     }
 }

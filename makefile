@@ -2,10 +2,12 @@ default_target: all
 
 C_COMPILE_OPTS = -mcpu=cortex-m3 -S -mthumb --specs=nosys.specs
 AS_COMPILE_OPTS = -mcpu=cortex-m3
-INCLUDE_DIRS = -Iinclude 
+INCLUDE_DIRS = -Iinclude
 
 SOURCE_DIR := src/
 BUILD_DIR := build/
+
+SOURCE_FILES = main.c gpio_drive.c
 
 # create C object file
 CC = arm-none-eabi-gcc 

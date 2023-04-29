@@ -33,14 +33,16 @@ typedef struct
 } RCC_TypeDef;
 
 // RCC base
-#define RCC_BASE    (uint32_t)0x40021000 // reset and clock control
+#define RCC_BASE    (vol uint32_t)0x40021000 // reset and clock control
 
 // GPIO bases
-#define GPIOA_BASE  (uint32_t)0x40010800
-#define GPIOB_BASE  (uint32_t)0x40010C00
-#define GPIOC_BASE  (uint32_t)0x40011000
+#define GPIOA_BASE  (vol uint32_t)0x40010800
+#define GPIOB_BASE  (vol uint32_t)0x40010C00
+#define GPIOC_BASE  (vol uint32_t)0x40011000
 
 // declare typedefs
+#define GPIOA       ((GPIO_TypeDef *) GPIOA_BASE)
+#define GPIOB       ((GPIO_TypeDef *) GPIOB_BASE)
 #define GPIOC       ((GPIO_TypeDef *) GPIOC_BASE)
 #define RCC         ((RCC_TypeDef *) RCC_BASE)
 
