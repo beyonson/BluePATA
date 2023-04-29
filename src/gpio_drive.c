@@ -54,3 +54,20 @@ void writeGPIO(uint8_t gpio, uint8_t pin, uint8_t value)
         value ? (GPIOC->ODR |= (value<<pin)) : (GPIOC->ODR &= ~(1<<pin));;
     }
 }
+
+/*
+* Function for reading from GPIO pins
+* gpio: gpio section A-C
+* pin: gpio pin to read
+* returns: gpio value
+*/
+int readGPIO(uint8_t gpio, uint8_t pin)
+{
+    if (gpio == 1) {
+        return GPIOA->IDR;
+    } else if (gpio == 2) {
+        return GPIOB->IDR;
+    } else if (gpio == 3) {
+        return GPIOC->IDR;
+    }
+}
