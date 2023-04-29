@@ -1,5 +1,12 @@
 #include "gpio_drive.h"
 
+/*
+* Function for configuring GPIO pins
+* gpio: gpio section A-C
+* pin: gpio pin to enable
+* cnf: port configuration bits
+* mode: gpio mode, input or output
+*/
 void initGPIO(uint8_t gpio, uint8_t pin, uint8_t mode, uint8_t cnf)
 {
     RCC->APB2ENR |= (1 << gpio); // enable gpio section chosen
@@ -28,5 +35,22 @@ void initGPIO(uint8_t gpio, uint8_t pin, uint8_t mode, uint8_t cnf)
             GPIOC->CRH &= ~(0xf << pin*4);
             GPIOC->CRH |= ((mode <<(pin*4)) | (cnf<<(pin*4+2)));
         }
+    }
+}
+
+/*
+* Function for writing to GPIO pins
+* gpio: gpio section A-C
+* pin: gpio pin to write
+* value: high or low
+*/
+void writeGPIO(uint8_t gpio, uint8_t pin, uint8_t value)
+{
+    if (gpio == 1) {
+        value ? (GPIOA->ODR |= (value<<pin)) : (GPIOA->ODR &= ~(1<<pin));;
+    } else if (gpio == 2) {
+        value ? (GPIOB->ODR |= (value<<pin)) : (GPIOB->ODR &= ~(1<<pin));;
+    } else if (gpio == 3) {
+        value ? (GPIOC->ODR |= (value<<pin)) : (GPIOC->ODR &= ~(1<<pin));;
     }
 }

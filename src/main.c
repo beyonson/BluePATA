@@ -19,9 +19,9 @@ int main(void)
     initGPIO(C, 13, OUTPUT10, GP_PP);
     for(;;)
     {
-        GPIOC->ODR &= 0x0000;
+        writeGPIO(C, 13, LOW);
         delay();
-        GPIOC->ODR |= 0x2000;
+        writeGPIO(C, 13, HIGH);
         delay();
     }
 }
