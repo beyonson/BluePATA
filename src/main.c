@@ -17,12 +17,12 @@ void reset_handler(void)
 int main(void)
 {
     initGPIO(C, 13, OUTPUT10, GP_PP);
+    initGPIO(A, 11, INPUT, FLI);
+    int state;
     for(;;)
     {
-        writeGPIO(C, 13, LOW);
-        delay();
-        writeGPIO(C, 13, HIGH);
-        delay();
+        state = readGPIO(A,11);
+        writeGPIO(C, 13, state);
     }
 }
 

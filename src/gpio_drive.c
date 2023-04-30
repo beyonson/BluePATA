@@ -9,8 +9,9 @@
 */
 void initGPIO(uint8_t gpio, uint8_t pin, uint8_t mode, uint8_t cnf)
 {
-    RCC->APB2ENR |= (1 << gpio); // enable gpio section chosen
-    
+    // enable APB2
+    RCC->APB2ENR |= (1 << (gpio + 1));
+
     if (pin <= 7)
     {
         if (gpio == 1) {
@@ -64,10 +65,10 @@ void writeGPIO(uint8_t gpio, uint8_t pin, uint8_t value)
 int readGPIO(uint8_t gpio, uint8_t pin)
 {
     if (gpio == 1) {
-        return GPIOA->IDR;
+        return ((GPIOA->IDR & (1<<pin))>>pin);
     } else if (gpio == 2) {
-        return GPIOB->IDR;
+        return ((GPIOB->IDR & (1<<pin))>>pin);
     } else if (gpio == 3) {
-        return GPIOC->IDR;
+        return ((GPIOC->IDR & (1<<pin))>>pin);
     }
 }
