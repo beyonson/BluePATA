@@ -16,6 +16,7 @@ typedef enum { GP_PP, GP_OD, AF_PP, AF_OD } OUTPUT_CNF;
 void initGPIO(uint8_t gpio, uint8_t pin, uint8_t mode, uint8_t cnf);
 void writeGPIO(uint8_t gpio, uint8_t pin, uint8_t value);
 int readGPIO(uint8_t gpio, uint8_t pin);
+void toggleGPIO(uint8_t gpio, uint8_t pin);
 
 #endif // __GPIO_DRIVE_H
 

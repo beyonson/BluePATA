@@ -72,3 +72,18 @@ int readGPIO(uint8_t gpio, uint8_t pin)
         return ((GPIOC->IDR & (1<<pin))>>pin);
     }
 }
+
+/*
+* Function for toggling GPIO pin values
+* gpio: gpio section A-C
+* pin: gpio pin to read
+* returns: gpio value
+*/
+void toggleGPIO(uint8_t gpio, uint8_t pin)
+{
+    if (readGPIO(gpio, pin)) {
+        writeGPIO(gpio, pin, 0);
+    } else {
+        writeGPIO(gpio, pin, 1);
+    }
+}
